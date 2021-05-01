@@ -17,6 +17,32 @@ Page({
   //   addGlobalClass: true,
   // },
   bind_joinProj:function(options){
+    const db = wx.cloud.database();
+    db.collection('member').add({
+      data:{
+        id: this.data.openid,
+        url: this.data.userInfo.avatarUrl,
+        name:this.data.userInfo.nickName,
+        pid: this.data.pid,
+        own: 0
+      },
+      success: function(res){
+        console.log(res)
+        // if(res.data == 'Already in'){
+        //   wx.showToast({
+        //     title: '已经加入！',
+        //   })
+        // }else{
+        //   wx.showToast({
+        //     title: '加入成功！',
+        //   })
+        // };
+      },
+      fail: function(res){
+        console.log("请求join proj的request 失败！")
+      }
+    })
+
     wx.request({
       url: 'https://wychandsome12138.xyz/api/post/join_proj',
       method: "POST",

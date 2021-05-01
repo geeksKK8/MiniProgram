@@ -80,6 +80,7 @@ Component({
     },
     longpress:function(e){
       var that = this;
+      const db = wx.cloud.database()
       // var pid = e.currentTarget.dataset.pid;//获取当前长按project下标
       wx.showModal({
       title: '提示',
@@ -87,23 +88,34 @@ Component({
       success: function (res) {
         if (res.confirm) {
           console.log('点击确定了');
-          wx.request({
-            url: 'https://wychandsome12138.xyz/api/post/delete_proj',
-            method: "POST",
-            data:{
-              "projid": e.currentTarget.dataset.pid
-            },
-            success: function(res){
+          db.collection('project').doc(e.currentTarget.dataset.pid).remove({
+            success: res=>{
               console.log("success delete project", res.data)
               wx.reLaunch({
                 url: '/pages/index/index',
               })
-              //console.log(res.data.length)
             },
             fail: function(res){
               console.log("delete project 的 request 失败！")
             }
-          });
+          })
+          // wx.request({
+          //   url: 'https://wychandsome12138.xyz/api/post/delete_proj',
+          //   method: "POST",
+          //   data:{
+          //     "projid": e.currentTarget.dataset.pid
+          //   },
+          //   success: function(res){
+          //     console.log("success delete project", res.data)
+          //     wx.reLaunch({
+          //       url: '/pages/index/index',
+          //     })
+          //     //console.log(res.data.length)
+          //   },
+          //   fail: function(res){
+          //     console.log("delete project 的 request 失败！")
+          //   }
+          // });
         } else if (res.cancel) {
           console.log('点击取消了');
           return false;    

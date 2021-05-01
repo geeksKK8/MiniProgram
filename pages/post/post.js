@@ -10,8 +10,8 @@ Page({
     proj_content: null,
     proj_ddl: null,
     userInfo:null,
-    openId:null
-
+    openId:null,
+    pid: null
   },
   PickerChange(e) {
     console.log(e);
@@ -125,6 +125,25 @@ Page({
   },
   submit_create: function(){
     var _this = this;
+    const db = wx.cloud.database()
+    db.collection('project').add({
+      data:{
+        userid: _this.data.openId,
+        pname: _this.data.proj_name,
+        content:  _this.data.proj_content,
+        ddl: _this.data.proj_ddl
+      },
+      success: res=>{
+        console.log("云数据库project新增成功" , res)
+        this.setData({
+          pid: res._id
+        })
+        _this.after_submit(_this)
+      },
+      fail: err=>{
+        console.error("云数据库project新增失败" , err)
+      }
+    })
     console.log(_this.data.proj_name, _this.data.proj_content, _this.data.proj_ddl,_this.data.openId);
     // 这是绑定给提交按钮的时间，调用接口提交create
     wx.request({
@@ -147,9 +166,32 @@ Page({
       }
       
     })
+    console.log('test',_this.data.pid)
+    // db.collection('member').add({
+    //   data:{
+    //     id: _this.data.openid,
+    //     url: _this.data.userInfo.avatarUrl,
+    //     name: _this.data.userInfo.nickName,
+    //     pid: _this.data.pid,
+    //     own: 1
+    //   }
+    // })
+    
     wx.reLaunch({
       url: '../index/index'
     })
 
+  },
+  after_submit: function(_this){
+    const db = wx.cloud.database()
+      db.collection('member').add({
+      data:{
+        id: _this.data.openid,
+        url: _this.data.userInfo.avatarUrl,
+        name: _this.data.userInfo.nickName,
+        pid: _this.data.pid,
+        own: 1
+      }
+    })
   }
 })

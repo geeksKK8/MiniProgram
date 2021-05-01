@@ -18,10 +18,10 @@ App({
     // 获取用户信息
     wx.getSetting({
       success: res => {
-        // console.log("getSetting success")
+        console.log("getSetting success")
         if (res.authSetting['scope.userInfo']) {
           // 就是这里没成功。
-          // console.log("auth setting is true")
+          console.log("auth setting is true")
           this.globalData.getUserInfoReady = true;
           // 这里赋值方便判断
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
@@ -32,7 +32,7 @@ App({
               console.log("wx getUserInfo success")
               // 可以将 res 发送给后台解码出 unionId
               userBasicInfo=res.userInfo;
-              //console.log(userBasicInfo)
+              console.log(userBasicInfo)
               this.globalData.userInfo = res.userInfo
                //获取access_token  (openid已经事先获取到了，很简单，官方文档介绍的很清楚了)
                 var appid ='wx8d5a947dca8f7394';//微信公众号开发者id

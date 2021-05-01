@@ -48,3 +48,19 @@ map,.mapBox{
   width: 750rpx;
   height: 300rpx;
 }
+.userinfo-avatar {
+  width: 200rpx;
+  height: 200rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  background-size: cover;
+  background-color: white;
+}
+
+.userinfo-block-avatar {
+  width: 200rpx;
+  height: 200rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
