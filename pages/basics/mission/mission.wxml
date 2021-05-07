@@ -22,7 +22,7 @@
     <view class="shadow cu-item">
       <view class="title">
         <view class="text-cut">{{item.title}}</view>
-        <text bindtap="tap" data-type="undone" data-index="{{index}}" style="font-size:20px" class="{{undone_checks[index]?'cuIcon-roundcheck':'cuIcon-round'}}"></text>
+        <text bindtap="tap" data-type="undone" data-index="{{index}}" data-tid="{{item._id}}" style="font-size:20px" class="{{undone_checks[index]?'cuIcon-roundcheck':'cuIcon-round'}}"></text>
         <!-- 这里是右边的勾选框 -->
       </view>
       <view class="content">
@@ -47,11 +47,11 @@
 </view>
 
 <view class="cu-list bottom">
-  <view class="cu-card article no-card cu-item" wx:for="{{done_tasks}}" wx:key="id" bindlongpress="longpress" data-tid="{{item.id}}" data-type="done" data-index="{{index}}">
+  <view class="cu-card article no-card cu-item" wx:for="{{done_tasks}}" wx:key="id" bindlongpress="longpress" data-tid="{{item._id}}" data-type="done" data-index="{{index}}">
     <view class="cu-item shadow">
       <view class="title">
         <view class="text-cut">{{item.title}}</view>
-        <text bindtap="tap" data-type="done" data-index="{{index}}" style="font-size:20px" class="{{done_checks[index]?'cuIcon-roundcheck':'cuIcon-round'}}"></text>
+        <text bindtap="tap" data-type="done" data-index="{{index}}" data-tid="{{item._id}}" style="font-size:20px" class="{{done_checks[index]?'cuIcon-roundcheck':'cuIcon-round'}}"></text>
       </view>
       <view class="content">
         <view class="desc">

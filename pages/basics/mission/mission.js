@@ -54,6 +54,7 @@ Component({
       var tid = e.currentTarget.dataset.tid;//获取当前长按task id
       var type = e.currentTarget.dataset.type;//获取当前长按task 类型 done/undone
       var index = e.currentTarget.dataset.index;//获取当前长按task index
+      console.log(tid)
       console.log(e.currentTarget.dataset)
       wx.showModal({
         title: '提示',
@@ -109,43 +110,78 @@ Component({
     tap:function(e){
         // this.donghua();
        //done 和 undone部分的逻辑交给调用组件的部分实现，undone,done作为component的property
-      //  console.log(e);
-      //  console.log(this.data)
-      var tid = null;
+       const db = wx.cloud.database()
+       console.log(e);
+       console.log(this.data)
+       var tid = e.currentTarget.dataset.tid;
+       console.log(tid)
+      //var tid = null;
       if(e.target.dataset.type == 'done'){
+        db.collection('task').doc(tid).update({
+          data:{
+            done: false
+          },
+          success: res=>{
+            console.log("改变任务状态成功")
+          },
+          fail: res=>{
+            console.log("改变任务状态失败")
+          }
+        })
         var ce = 'done_checks[' + e.target.dataset.index + ']'
-        tid = this.data.done_tasks[e.target.dataset.index].id
+        // tid = this.data.done_tasks[e.target.dataset.index].id
         this.setData({
           [ce]: !this.data.done_checks[e.target.dataset.index]
         }) 
       }else{
+        db.collection('task').doc(tid).update({
+          data:{
+            done: true
+          },
+          success: res=>{
+            console.log("改变任务状态成功")
+          },
+          fail: res=>{
+            console.log("改变任务状态失败")
+          }
+        })
         var ce = 'undone_checks[' + e.target.dataset.index + ']'
-        tid = this.data.undone_tasks[e.target.dataset.index].id
+        // tid = this.data.undone_tasks[e.target.dataset.index].id
         this.setData({
           [ce]: !this.data.undone_checks[e.target.dataset.index]
         }) 
       }
-      console.log(tid)
-      this.alter_task_status(tid);
+      //this.alter_task_status(tid);
      },
-     alter_task_status(tid){
-
-      const db = wx.cloud.database()
-      //const newdone = 
-      wx.request({
-        url: 'https://wychandsome12138.xyz/api/post/alter_task_status',
-        method: "POST",
-        data:{
-          "tid": tid
-        },
-        success: function(res){
-          console.log("alter task status success")
-        },
-        fail: function(res){
-          console.log("alter task status 的 request 失败！")
-        }
-      });
-     },
+    //  alter_task_status(tid){
+      
+    //   const db = wx.cloud.database()
+    //   //const newdone = 
+    //   db.collection('task').doc(tid).update({
+    //     data:{
+    //       done: 
+    //     },
+    //     success: res=>{
+    //       console.log("改变任务状态成功")
+    //     },
+    //     fail: res=>{
+    //       console.log("改变任务状态失败")
+    //     }
+    //   })
+    //   // wx.request({
+    //   //   url: 'https://wychandsome12138.xyz/api/post/alter_task_status',
+    //   //   method: "POST",
+    //   //   data:{
+    //   //     "tid": tid
+    //   //   },
+    //   //   success: function(res){
+    //   //     console.log("alter task status success")
+    //   //   },
+    //   //   fail: function(res){
+    //   //     console.log("alter task status 的 request 失败！")
+    //   //   }
+    //   // });
+    //  },
       donghua: function () {
         console.log("donghua ！")
        
