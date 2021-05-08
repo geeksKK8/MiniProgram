@@ -19,7 +19,6 @@ App({
         let custom = wx.getMenuButtonBoundingClientRect();
         this.globalData.Custom = custom;  
         this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
-        
       }
     })  
     // 展示本地存储能力
