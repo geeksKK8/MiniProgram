@@ -102,6 +102,11 @@ Page({
     //   }
     // })
   },
+  jumpto_member(){
+    wx.navigateTo({
+      url: '/pages/basics/members/members?pid='+this.data.pid+'&pname='+this.data.projContent.pname+'&pmember='+JSON.stringify(this.data.projContent.portraits),
+    })
+  },
   get_db_info(_this){
     wx.cloud.callFunction({
       name: 'get_proj_all',

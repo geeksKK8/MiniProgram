@@ -75,9 +75,10 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
+    
     this.setData({
       pid: options.pid,
-      inviter: options.inviter
+      inviter: options.inviterm,
     },()=>{
       this.get_proj_info();
     });

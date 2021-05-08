@@ -7,7 +7,7 @@ Page({
     hasUserInfo:false,
     usrid: "test_usrid",
     elements: [],
-    usrss: [],
+    users: [],
     openid: null,
     // usrid 应该通过接口获取后setdata
   },
@@ -95,21 +95,36 @@ Page({
     const db = wx.cloud.database()
     var pid_list=[], i;
     // 这里的wx.request卡住了，我在console里敲一个wx.request他就会继续跑？这TMD到底是为什么
-
-    db.collection('project').where({
-      userid: _this.data.openid
-    }).get({
-      success: res=>{
-        console.log("success request get_proj_list_by_usrid", res.data);
-        // console.log(res);
-        _this.setData({
-          elements: res.data
-        })
+    wx.cloud.callFunction({
+      name: "get_proj_list",
+      data:{
+        oid: _this.data.openid
       },
-      fail: res=>{
-        console.log("get project list by user id 请求数据失败!!", res);
+      success: res=>{
+        console.log('调用get_proj_list成功',res)
+        const path = res.result.data.list
+        _this.setData({
+          elements: path
+        })
       }
     })
+    // db.collection('project').where({
+    //   userid: _this.data.openid
+    // }).get({
+    //   success: res=>{
+    //     console.log("success request get_proj_list_by_usrid", res.data);
+    //     // console.log(res);
+    //     _this.setData({
+    //       elements: res.data
+    //     })
+    //   },
+    //   fail: res=>{
+    //     console.log("get project list by user id 请求数据失败!!", res);
+    //   }
+    // })
+
+
+
   //   wx.request({
   //     url: "https://wychandsome12138.xyz/api/get/get_proj_list_by_usrid", 
   //     method: "POST", // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT 

@@ -20,10 +20,14 @@ Component({
     finishedNum: 8,
     unfinishedNum: 15,
     userInfo: {},
+    nickName: "点击登录",
+    avatarUrl: app.globalData.avatarUrl,
     hasUserInfo: false,
     canIUseGetUserProfile: true,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl'),
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    login: 0,
+    exp: 0,
   },
   methods: {
     getUserProfile() {
@@ -31,11 +35,17 @@ Component({
       wx.getUserProfile({
         desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
         success: (res) => {
+          app.globalData.userInfo = res.userInfo
           this.setData({
             avatarUrl: res.userInfo.avatarUrl,
             userInfo: res.userInfo,
             hasUserInfo: true,
           })
+          console.log(res)
+          var appid ='wx8d5a947dca8f7394';//微信公众号开发者id
+          var secret ='6feadcff71f7e71b065d525345c960af';//微信公众号开发者secret_key
+          var that = this;
+          
         }
       })
     },

@@ -98,17 +98,18 @@ Page({
     var mydate = new Date();
     _this.setData({
       proj_ddl: mydate.getFullYear() + '-' + (1 + mydate.getMonth()) + '-' + mydate.getDate(),
+      userInfo: app.globalData.userInfo
       // proj_ddl: mydate.toLocaleDateString().replace(/\//g,'-')
       // 用当前时间初始化
     })
-    wx.getUserInfo({
-      success: res => {
-        //console.log(res)
-        _this.setData({
-          userInfo:res.userInfo
-        })
-      }
-    })
+    // wx.getUserInfo({
+    //   success: res => {
+    //     //console.log(res)
+    //     _this.setData({
+    //       userInfo:res.userInfo
+    //     })
+    //   }
+    // })
     wx.cloud.init();
     wx.cloud.callFunction({
       // 云函数名称

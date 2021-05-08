@@ -3,7 +3,7 @@ Page({
   data: {
     pid: null,
     pname: null,
-    users: [],
+    users: null,
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     hidden: true,
@@ -23,25 +23,32 @@ Page({
     var _this = this;
     this.setData({
       pid: options.pid,
-      pname: options.pname
-    },()=>{
-      wx.request({
-        url: 'https://wychandsome12138.xyz/api/get/get_users_by_idlist',
-        method: "POST",
-        data:{
-          "projid": [_this.data.pid]
-        },
-        success: function(res){
-          _this.setData({
-            users: res.data[_this.data.pid]
-          });
-          // console.log(res.data[_this.data.pid]);
-        },
-        fail: function(res){
-          console.log("请求proj users的 list的request 失败！")
-        }
-      });
+      pname: options.pname,
+      users: JSON.parse(options.pmember)
     });
+    console.log(this.data.users)
+    // const db = wx.cloud.database()
+    // db.collection('member').where({
+    //   pid:
+    // })
+    // ,()=>{
+    //   wx.request({
+    //     url: 'https://wychandsome12138.xyz/api/get/get_users_by_idlist',
+    //     method: "POST",
+    //     data:{
+    //       "projid": [_this.data.pid]
+    //     },
+    //     success: function(res){
+    //       _this.setData({
+    //         users: res.data[_this.data.pid]
+    //       });
+    //       // console.log(res.data[_this.data.pid]);
+    //     },
+    //     fail: function(res){
+    //       console.log("请求proj users的 list的request 失败！")
+    //     }
+    //   });
+    // });
     let list = [];
     for (let i = 0; i < 26; i++) {
       list[i] = String.fromCharCode(65 + i)

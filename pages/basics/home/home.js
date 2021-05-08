@@ -54,7 +54,8 @@ Component({
     //   }
     // },
     ready: function () {
-      console.log(this.data.elements.length)
+      console.log(this.data.elements)
+      console.log(this.data.users)
       var that=this
       if(this.data.elements.length==0){
         setTimeout(function () {
