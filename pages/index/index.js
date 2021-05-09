@@ -44,49 +44,49 @@ Page({
   },
   sendMsg:function(){
     var that = this
-    wx.requestSubscribeMessage({
-      tmplIds: ["Z3foe66HMD0yAB4WrDjGEOVsZQV_uI50thPH7SdXDpE"],
-      success(res) {
-        console.log(app.globalData.openId)
-        console.log(res)
-        if (res["Z3foe66HMD0yAB4WrDjGEOVsZQV_uI50thPH7SdXDpE"] === 'accept') {
-          console.log('用户同意了')
-          wx.showToast({
-            title: '订阅OK！',
-            duration: 1000,
-          })
-          // 这个域名不允许被加到白名单
-          // wx.request({
-          //   url: 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=' + app.globalData.access_token,
-          //   header: {'content-type': 'application/json'},
-          //   method:'POST',
-          //   data:
-          //     {"touser": app.globalData.openId,
-          //     "template_id": "Z3foe66HMD0yAB4WrDjGEOVsZQV_uI50thPH7SdXDpE",
-          //     "page": "index",                  //点击订阅消息以后跳转到的小程序页面
-          //     "miniprogram_state": "developer",
-          //     "lang": "zh_CN",
-          //     "data": {
-          //         "thing1": {
-          //           "value": "Project1"
-          //         },
-          //         "time2": {
-          //           "value": "2020年12月21日 24:00"
-          //         }
-          //       }
-          //   },
-          //   //调用接口成功
-          //   success: function (res) {
-          //     console.log(res);
-          //   },
-          // });
-        }
-      },
-      fail(err) {
-        //失败
-        console.error(err);
-      }
-    })
+    // wx.requestSubscribeMessage({
+    //   tmplIds: ["Z3foe66HMD0yAB4WrDjGEOVsZQV_uI50thPH7SdXDpE"],
+    //   success(res) {
+    //     console.log(app.globalData.openId)
+    //     console.log(res)
+    //     if (res["Z3foe66HMD0yAB4WrDjGEOVsZQV_uI50thPH7SdXDpE"] === 'accept') {
+    //       console.log('用户同意了')
+    //       wx.showToast({
+    //         title: '订阅OK！',
+    //         duration: 1000,
+    //       })
+    //       // 这个域名不允许被加到白名单
+    //       // wx.request({
+    //       //   url: 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=' + app.globalData.access_token,
+    //       //   header: {'content-type': 'application/json'},
+    //       //   method:'POST',
+    //       //   data:
+    //       //     {"touser": app.globalData.openId,
+    //       //     "template_id": "Z3foe66HMD0yAB4WrDjGEOVsZQV_uI50thPH7SdXDpE",
+    //       //     "page": "index",                  //点击订阅消息以后跳转到的小程序页面
+    //       //     "miniprogram_state": "developer",
+    //       //     "lang": "zh_CN",
+    //       //     "data": {
+    //       //         "thing1": {
+    //       //           "value": "Project1"
+    //       //         },
+    //       //         "time2": {
+    //       //           "value": "2020年12月21日 24:00"
+    //       //         }
+    //       //       }
+    //       //   },
+    //       //   //调用接口成功
+    //       //   success: function (res) {
+    //       //     console.log(res);
+    //       //   },
+    //       // });
+    //     }
+    //   },
+    //   fail(err) {
+    //     //失败
+    //     console.error(err);
+    //   }
+    // })
   },
   after_get_openid(_this){
     // console.log("after_get_openid is running")

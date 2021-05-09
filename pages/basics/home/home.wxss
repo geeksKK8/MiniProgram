@@ -41,7 +41,7 @@ image[class*="gif-"] {
   display: block;
   height: 300px;
   background-color: #f1f1f1;
-
+  width:80vw;
 }
 .backg{
   height: 200px; 
@@ -49,3 +49,15 @@ image[class*="gif-"] {
   justify-content: center;        
   align-items:center;   
 }
+.navtitle{
+  font-weight: bolder;
+  font-size:18px;
+  margin-bottom: 5rpx;
+  margin-top: 5rpx;
+
+}
+.navname{
+  font-size: medium;
+  margin-top: 10rpx;
+}
+
