@@ -11,7 +11,7 @@ Page({
     openid:null
   },
   onShareAppMessage: function () {
-    console.log(userInfo.nickName);
+    //console.log(userInfo.nickName);
     return {
         title: app.globalData.userInfo.nickName + " 邀请您加入 " + this.data.pname,
         desc: '快来加入我们的项目和大家一起肝DDL吧',

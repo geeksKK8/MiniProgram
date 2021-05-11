@@ -10,13 +10,14 @@ Page({
     hasUserInfo:false,
     openid: null, 
     pid:0,
-    projinfo: null,
+    projInfo: null,
     inviter:null
   },
   // options: {
   //   addGlobalClass: true,
   // },
   bind_joinProj:function(options){
+    //待添加 判断是否已加入
     const db = wx.cloud.database();
     db.collection('member').add({
       data:{
@@ -43,31 +44,31 @@ Page({
       }
     })
 
-    wx.request({
-      url: 'https://wychandsome12138.xyz/api/post/join_proj',
-      method: "POST",
-      data:{
-        "id": this.data.openid,
-        "url": this.data.userInfo.avatarUrl,
-        "name":this.data.userInfo.nickName,
-        "pid": this.data.pid,
-      },
-      success: function(res){
-        console.log(res)
-        if(res.data == 'Already in'){
-          wx.showToast({
-            title: '已经加入！',
-          })
-        }else{
-          wx.showToast({
-            title: '加入成功！',
-          })
-        };
-      },
-      fail: function(res){
-        console.log("请求join proj的request 失败！")
-      }
-    });
+    // wx.request({
+    //   url: 'https://wychandsome12138.xyz/api/post/join_proj',
+    //   method: "POST",
+    //   data:{
+    //     "id": this.data.openid,
+    //     "url": this.data.userInfo.avatarUrl,
+    //     "name":this.data.userInfo.nickName,
+    //     "pid": this.data.pid,
+    //   },
+    //   success: function(res){
+    //     console.log(res)
+    //     if(res.data == 'Already in'){
+    //       wx.showToast({
+    //         title: '已经加入！',
+    //       })
+    //     }else{
+    //       wx.showToast({
+    //         title: '加入成功！',
+    //       })
+    //     };
+    //   },
+    //   fail: function(res){
+    //     console.log("请求join proj的request 失败！")
+    //   }
+    // });
     this.refuse();
   },
   /**
@@ -78,7 +79,7 @@ Page({
     
     this.setData({
       pid: options.pid,
-      inviter: options.inviterm,
+      inviter: options.inviter,
     },()=>{
       this.get_proj_info();
     });
@@ -130,23 +131,46 @@ Page({
   },
   get_proj_info(){
     var _this=this
-    wx.request({
-      url: 'https://wychandsome12138.xyz/api/get/get_one_proj_all',
-      method: "POST",
+    wx.cloud.callFunction({
+      name: 'get_proj_all',
       data:{
-        "pid": _this.data.pid
+        pid: this.data.pid
       },
-      success: function(res){
-        // console.log(res.data)
-        console.log("get proj info success")
+      success: res=>{
+        console.log('调用云函数成功',res)
+        const path = res.result.data.list[0]
         _this.setData({
-          projInfo: res.data,
+          projInfo: path
+          //projContent: path,
+          //percentage: ( (path.done_tasks.length + path.undone_tasks.length) > 0 )?Math.floor(path.done_tasks.length / (path.done_tasks.length + path.undone_tasks.length) * 100).toString() + '\%':'0%',
+        }, ()=>{
+            //隐藏loading 提示框
+            wx.hideLoading();
+            //隐藏导航条加载动画
+            wx.hideNavigationBarLoading();
+            //停止下拉刷新
+            wx.stopPullDownRefresh();
         })
-      },
-      fail: function(res){
-        console.log("请求proj 所有数据的request 失败！")
-      }
-    });
+      }      
+    })
+
+    // wx.request({
+    //   url: 'https://wychandsome12138.xyz/api/get/get_one_proj_all',
+    //   method: "POST",
+    //   data:{
+    //     "pid": _this.data.pid
+    //   },
+    //   success: function(res){
+    //     // console.log(res.data)
+    //     console.log("get proj info success")
+    //     _this.setData({
+    //       projInfo: res.data,
+    //     })
+    //   },
+    //   fail: function(res){
+    //     console.log("请求proj 所有数据的request 失败！")
+    //   }
+    // });
   },
   refuse: function(){
     console.log("refuse inviter")

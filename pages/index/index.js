@@ -28,6 +28,7 @@ Page({
     //   accessReady: app.globalData.getUserInfoReady
     // })
     this.onRefresh("Load");
+
   },
   getUserInfo: function(e) {
     // console.log(e)

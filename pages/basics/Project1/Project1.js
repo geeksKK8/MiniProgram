@@ -157,9 +157,10 @@ Page({
     // });
   },
   onShareAppMessage: function () {
-    console.log(userInfo.nickName);
+    //console.log(userInfo.nickName);
+    console.log(this.data.pid)
     return {
-        title: app.globalData.userInfo.nickName + " 邀请您加入 " + this.data.projContent.content[0].pname,
+        title: app.globalData.userInfo.nickName + " 邀请您加入 " + this.data.projContent.pname,
         desc: '快来加入我们的项目和大家一起肝DDL吧',
         imageUrl: '/static/TeamHelper.jpg',  
         path: "/share/share?pid=" + this.data.pid + "&inviter=" + app.globalData.userInfo.nickName // 路径，传递参数到指定页面。

@@ -20,14 +20,24 @@ Component({
     finishedNum: 8,
     unfinishedNum: 15,
     userInfo: {},
-    nickName: "点击登录",
+    nickName: app.globalData.nickName,
     avatarUrl: app.globalData.avatarUrl,
     hasUserInfo: false,
     canIUseGetUserProfile: true,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl'),
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    login: 0,
+    login: app.globalData.login,
     exp: 0,
+  },
+  lifetimes:{
+    ready: function(){
+      this.setData({
+        nickName: app.globalData.nickName,
+        avatarUrl: app.globalData.avatarUrl,
+        login: app.globalData.login
+      })
+      console.log(this.data.avatarUrl+" "+this.data.nickName+" "+this.data.login)
+    }
   },
   methods: {
     getUserProfile() {
@@ -36,15 +46,20 @@ Component({
         desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
         success: (res) => {
           app.globalData.userInfo = res.userInfo
+          app.globalData.avatarUrl = res.userInfo.avatarUrl
+          app.globalData.nickName = res.userInfo.nickName
+          app.globalData.login = true
           this.setData({
             avatarUrl: res.userInfo.avatarUrl,
+            login: true,
+            nickName: res.userInfo.nickName,
             userInfo: res.userInfo,
             hasUserInfo: true,
           })
-          console.log(res)
-          var appid ='wx8d5a947dca8f7394';//微信公众号开发者id
-          var secret ='6feadcff71f7e71b065d525345c960af';//微信公众号开发者secret_key
-          var that = this;
+          console.log('hello'+res)
+          // var appid ='wx8d5a947dca8f7394';//微信公众号开发者id
+          // var secret ='6feadcff71f7e71b065d525345c960af';//微信公众号开发者secret_key
+          // var that = this;
           
         }
       })

@@ -9,14 +9,14 @@
   <block wx:else>
     <view  open-type="navigate" hover-class='none' class="nav-li bg-white light card align-center margin1" style="margin:auto;text-align:center;margin-top:50rpx;height:auto">
       <!-- <view class="nav-title">{{projInfo.content[0].pname}}</view> -->
-      <view class="text-xl text-bold">{{projInfo.content[0].pname}}</view>
+      <view class="text-xl text-bold">{{projInfo.pname}}</view>
       <view class="cu-avatar-group align-center" >
         <view class="cu-avatar avatar round lg margin" wx:for="{{projInfo.portraits}}" wx:for-item="item" style="background-image:url({{item.url}});" wx:key="{{item}}">
         </view>
       </view>
       <!-- <view class="nav-name">{{projInfo.content[0].content}}</view> -->
-      <view class="text-content">{{projInfo.content[0].content}}</view>
-      <view class="text-content">ddl:{{projInfo.content[0].ddl}}</view>
+      <view class="text-content">{{projInfo.content}}</view>
+      <view class="text-content">ddl:{{projInfo.ddl}}</view>
       <!-- <text class='cuIcon-newsfill'></text> -->
     </view>
     
