@@ -8,12 +8,19 @@ exports.main = async (event, context) => {
     const db = cloud.database()
     const _ = db.command
     const $ = db.command.aggregate
-    const data = await db.collection('project').aggregate().match({
+    const data = await db.collection('member').aggregate().match({
         //_id: event.pid
         _openid: event.oid
-    }).lookup({
+    })
+    .lookup({
+        from: 'project',
+        localField: 'pid',
+        foreignField: '_id',
+        as: 'information'
+    })
+    .lookup({
         from: 'member',
-        localField: '_id',
+        localField: 'pid',
         foreignField: 'pid',
         as: 'portraits'
     }).end()
