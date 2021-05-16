@@ -1,0 +1,92 @@
+{
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "id": -1,
+                    "name": "pages/basics/home/home",
+                    "pathName": "pages/basics/home/home",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/index/index",
+                    "pathName": "pages/index/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 2,
+                    "name": "share/share",
+                    "pathName": "share/share",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/post/post",
+                    "pathName": "pages/post/post",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/mypage/aboutus/aboutus",
+                    "pathName": "pages/mypage/aboutus/aboutus",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/basics/members/members",
+                    "pathName": "pages/basics/members/members",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/mypage/alltasks/alltasks",
+                    "pathName": "pages/mypage/alltasks/alltasks",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/basics/hello/hello",
+                    "pathName": "pages/basics/hello/hello",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "share/share",
+                    "pathName": "share/share",
+                    "query": "pid=\"28ee4e3e609655dd16e8b40a6c8ae38f\"&inviter=koookiy嗷",
+                    "scene": null
+                },
+                {
+                    "name": "share/share",
+                    "pathName": "share/share",
+                    "query": "pid=28ee4e3e609655dd16e8b40a6c8ae38f&inviter=koookiy%E5%97%B7",
+                    "scene": null
+                },
+                {
+                    "name": "share/share",
+                    "pathName": "share/share",
+                    "query": "pid=28ee4e3e609655dd16e8b40a6c8ae38f&inviter=koookiy嗷",
+                    "scene": null
+                }
+            ]
+        }
+    }
+}

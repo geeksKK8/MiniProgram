@@ -22,7 +22,7 @@
     
     <view class="container" style="margin-top:60rpx">
       <text class="inv text-lg text-bold">{{inviter}}邀请您加入</text>
-      <button class="btn text-gray" bindtap="bind_joinProj" type="primary">加入</button>
+      <button class="btn text-gray" bindtap="getUserInfoFun" type="primary">加入</button>
       <button class="btn bg-grey light" bindtap="refuse" type="default">拒绝</button>
     </view>
   </block>    

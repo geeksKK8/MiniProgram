@@ -16,19 +16,19 @@ Page({
   // options: {
   //   addGlobalClass: true,
   // },
-  bind_joinProj:function(options){
+  bind_joinProj:function(){
+
     //待添加 判断是否已加入
     const db = wx.cloud.database();
     db.collection('member').add({
       data:{
-        id: this.data.openid,
         url: this.data.userInfo.avatarUrl,
         name:this.data.userInfo.nickName,
         pid: this.data.pid,
         own: 0
       },
       success: function(res){
-        console.log(res)
+        console.log("success"+res)
         // if(res.data == 'Already in'){
         //   wx.showToast({
         //     title: '已经加入！',
@@ -81,9 +81,11 @@ Page({
       pid: options.pid,
       inviter: options.inviter,
     },()=>{
+      //console.log(_this.data.pid+" "+_this.data.inviter)
       this.get_proj_info();
+      //console.log(_this.data.projInfo)
     });
-    this.getUserInfoFun();
+    //this.getUserInfoFun();
     wx.cloud.init();
     wx.cloud.callFunction({
       // 云函数名称
@@ -106,22 +108,38 @@ Page({
 
   },
   getUserInfoFun: function (){
-    var _this = this;
-    wx.getUserInfo({
-        success: function (res){
-          // console.log(res)　　　　　　　//do anything
-          _this.setData({
-            userInfo: res.userInfo,
-            eye: true
-          })
-        },
-        fail: function(res){
-          // _this.showPrePage();
-          _this.setData({
-            eye: false
-          })
-        }
-      })
+    wx.getUserProfile({
+      desc: '展示用户信息',
+      success: res=>{
+        app.globalData.userInfo = res.userInfo
+        app.globalData.avatarUrl = res.userInfo.avatarUrl
+        app.globalData.nickName = res.userInfo.nickName
+        app.globalData.login = true
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+        console.log('hello'+res)
+        this.bind_joinProj()
+      }
+    })
+    // var _this = this;
+    // wx.getUserInfo({
+    //     success: function (res){
+    //       // console.log(res)　　　　　　　//do anything
+    //       _this.setData({
+    //         userInfo: res.userInfo,
+    //         eye: true
+    //       })
+    //     },
+    //     fail: function(res){
+    //       // _this.showPrePage();
+    //       _this.setData({
+    //         eye: false
+    //       })
+    //     }
+    //   })
+
   },
   showPrePage:function(){
       console.log("show PrePage");
